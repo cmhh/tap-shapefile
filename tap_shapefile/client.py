@@ -35,7 +35,8 @@ class ShapefileStream(Stream):
         super().__init__(*args, **kwargs)
         self.path = self.file_config.get("path")
         self.id = self.file_config.get("id")
-    
+        self.encoding = self.file_config.get("encoding")
+
     def get_records(
         self,
         context: dict | None, 
@@ -49,11 +50,17 @@ class ShapefileStream(Stream):
         Args:
             context: Stream partition or context dictionary.  Not used.
         """
-        sf = shapefile.Reader(self.path)
+        def s(x):
+            if (self.encoding != "utf-8"):
+                return x.encode(self.encoding).decode("utf-8", errors = "replace")
+            else:
+                return x
+        
+        sf = shapefile.Reader(self.path, encoding = self.encoding)
         for sr in sf: 
             rec = sr.record.as_dict()
-            id = str(rec.get(self.id))
+            id = s(str(rec.get(self.id)))
             for k in rec:
-                yield {'id': id, 'name': k, 'value': str(rec[k]), 'type': type(rec[k]).__name__}
+                yield {'id': id, 'name': k, 'value': s(str(rec[k])), 'type': type(rec[k]).__name__}
             yield {'id': id, 'name': 'geom', 'value': str(sr.shape.__geo_interface__), 'type': 'geojson'}
 

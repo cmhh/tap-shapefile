@@ -32,6 +32,12 @@ class TapShapefile(Tap):
                         th.StringType,
                         required = True,
                         description = "Name of attribute which should be treated as a unique ID."
+                    ),
+                    th.Property(
+                        "encoding",
+                        th.StringType,
+                        default = "utf-8",
+                        description = "Encoding of dbf file."
                     )
                 )
             )

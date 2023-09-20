@@ -4,7 +4,7 @@ from singer_sdk.testing import get_tap_test_class
 from tap_shapefile.tap import TapShapefile
 
 SAMPLE_CONFIG = {
-    "files": [{"entity": "test", "path": "data/test_10", "id": "id"}]
+    "files": [{"entity": "test", "path": "data/test", "id": "id"}]
 }
 
 TestTapShapefile = get_tap_test_class(
