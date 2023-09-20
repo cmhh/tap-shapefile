@@ -52,7 +52,7 @@ class ShapefileStream(Stream):
         """
         def s(x):
             if (self.encoding != "utf-8"):
-                return x.encode(self.encoding).decode("utf-8", errors = "remove")
+                return x.encode(self.encoding).decode("utf-8", errors = "ignore")
             else:
                 return x
         
