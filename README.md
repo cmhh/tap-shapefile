@@ -29,10 +29,10 @@ id       | name | value                                   |  type
 ---------|------|-----------------------------------------|------------
 5bf1fd92 |    x |                                       1 |  INT 
 5bf1fd92 |    y |                                       a |  TEXT 
-5bf1fd92 | geom | {'type': 'Polygon', 'coordinates': ...} |  GEOGRAPHY
+5bf1fd92 | geom | POLYGON(( ... ))                        |  WKT
 d3395867 |    x |                                       2 |  INT 
 d3395867 |    y |                                       b |  TEXT 
-d3395867 | geom | {'type': 'Polygon', 'coordinates': ...} |  GEOGRAPHY
+d3395867 | geom | POLYGON (( ... ))                       |  WKT
 
 This is done so that the extractor can be used more easily with existing loaders.  For example, if we wanted to load the data to any of SQL Server Spatial, PostgreSQL / PostGIS, SpatiaLite, or Snowflake as spatial tables, we'd likely need to do something platform-specific in each case.  With the long format, we can use a platform-specific transformation in dbt or similar later.  For example, by pivoting the table about `id` and coercing the values as appropriate at the same time.  It would be possible to make a tap that outputs data in a wide format, but converts the geographic data to one of the more popular string representations, of course.
 
