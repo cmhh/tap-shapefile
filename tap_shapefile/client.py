@@ -6,6 +6,7 @@ from singer_sdk.streams import Stream
 from singer_sdk import typing as th  
 
 import shapefile
+import pygeoif
 
 class ShapefileStream(Stream):
     """Stream class for shapefile streams."""
@@ -60,7 +61,8 @@ class ShapefileStream(Stream):
         for sr in sf: 
             rec = sr.record.as_dict()
             id = s(str(rec.get(self.id)))
+            shp = pygeoif.shape(sr.shape.__geo_interface__).wkt
             for k in rec:
                 yield {'id': id, 'name': k, 'value': s(str(rec[k])), 'type': type(rec[k]).__name__}
-            yield {'id': id, 'name': 'geom', 'value': str(sr.shape.__geo_interface__), 'type': 'geojson'}
+            yield {'id': id, 'name': 'geom', 'value': shp, 'type': 'wkt'}
 

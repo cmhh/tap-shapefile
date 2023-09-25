@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "tap-shapefile"
-version = "0.0.2"
+version = "0.0.3"
 description = "`tap-shapefile` is a Singer tap for shapefile, built with the Meltano Singer SDK."
 readme = "README.md"
 authors = ["Chris Hansen <cmhhansen@outlook.com>"]
