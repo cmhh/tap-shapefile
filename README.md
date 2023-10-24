@@ -1,8 +1,22 @@
 # tap-shapefile
 
-`tap-shapefile` is a Singer tap for ESRI shapefiles.
+`tap-shapefile` is a Singer tap for ESRI shapefiles.  Built with the [Meltano Tap SDK](https://sdk.meltano.com) for Singer Taps.
 
-Built with the [Meltano Tap SDK](https://sdk.meltano.com) for Singer Taps.
+## Quick Start
+
+A basic pipeline is included using shapefiles found in [`./data`](./data), specifically [`./data/test.shp`](./data/test.shp).  If meltano is already installed, it should be enough to run:
+
+```bash
+meltano install
+```
+
+to install the required extractors and loaders, and then:
+
+```bash
+metano run tap-shapefile target-jsonl
+```
+
+to run the pipeline.
 
 ## To Do
 

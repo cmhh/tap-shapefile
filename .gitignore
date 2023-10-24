@@ -136,3 +136,6 @@ dmypy.json
 
 # working files 
 output
+data
+!data/test.*
+!data/test_10000.*
